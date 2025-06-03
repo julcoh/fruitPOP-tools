@@ -6,6 +6,15 @@
 # • gspread_dataframe– Helper: move whole DataFrames in/out of Sheets
 # • oauth2client     – Handles the OAuth dance inside Colab
 # =============================================================================
+
+import subprocess, sys
+
+# Install required libraries when executed outside of a notebook.
+subprocess.run(
+    [sys.executable, "-m", "pip", "install", "-q",
+     "ortools", "gspread", "gspread_dataframe", "oauth2client"],
+    check=True,
+)
 #!pip install -q ortools gspread gspread_dataframe oauth2client
 
 # =============================================================================
@@ -291,7 +300,8 @@ for i in range(1, 21):
 summary_df = pd.DataFrame(summary_rows)
 
 # Append a blank line then the summary table to audit_df
-blank_row = pd.DataFrame([{'Volunteer': ''} | {}])  # minimal blank
+# Using an explicit dictionary avoids relying on Python 3.9+'s dict union.
+blank_row = pd.DataFrame([{'Volunteer': ''}])  # minimal blank
 audit_df  = pd.concat([audit_df, blank_row, summary_df], ignore_index=True)
 
 # Footer
