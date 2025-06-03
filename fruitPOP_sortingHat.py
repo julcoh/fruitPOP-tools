@@ -6,6 +6,7 @@
 # • gspread_dataframe– Helper: move whole DataFrames in/out of Sheets
 # • oauth2client     – Handles the OAuth dance inside Colab
 # =============================================================================
+
 import subprocess, sys
 
 # Install required libraries when executed outside of a notebook.
@@ -14,6 +15,7 @@ subprocess.run(
      "ortools", "gspread", "gspread_dataframe", "oauth2client"],
     check=True,
 )
+#!pip install -q ortools gspread gspread_dataframe oauth2client
 
 # =============================================================================
 # 1.  Authenticate this Colab session with your Google account
